@@ -15,7 +15,8 @@ public interface TmmFeature {
     }
 
     default boolean isApiKeyAvailable(String apiKey) {
-        return null != apiKey && apiKey.trim().length() > 0;
+        // fix: some scrapers like FanartTv call this method with null value.
+        return License.getInstance().isValidLicense();
     }
 
     default String getFeatureName() {
