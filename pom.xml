@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.tinymediamanager</groupId>
     <artifactId>license-cracked</artifactId>
-    <version>5.1.1-bugfix</version>
+    <version>5.1.1</version>
     <name>tinyMediaManager cracked license module</name>
     <description>the cracked license module for tinyMediaManager</description>
 
@@ -23,6 +23,11 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.30</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.13.0</version>
         </dependency>
     </dependencies>
 

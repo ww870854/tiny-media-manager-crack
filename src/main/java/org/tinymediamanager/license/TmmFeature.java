@@ -1,5 +1,7 @@
 package org.tinymediamanager.license;
 
+import org.apache.commons.lang3.StringUtils;
+
 public interface TmmFeature {
 
     default boolean isFeatureEnabled() {
@@ -15,8 +17,10 @@ public interface TmmFeature {
     }
 
     default boolean isApiKeyAvailable(String apiKey) {
-        // fix: some scrapers like FanartTv call this method with null value.
-        return License.getInstance().isValidLicense();
+        if (StringUtils.isNoneBlank(apiKey)) {
+            return true;
+        }
+        return StringUtils.isNoneBlank(getApiKey());
     }
 
     default String getFeatureName() {
