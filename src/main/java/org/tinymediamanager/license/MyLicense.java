@@ -58,7 +58,7 @@ public class MyLicense implements License {
     }
 
     @Override
-    public void init2121() {
+    public void init2122() {
         LOGGER.info("JUST FOR STUDYING!!!");
     }
 
