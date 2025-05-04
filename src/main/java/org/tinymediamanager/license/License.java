@@ -7,7 +7,7 @@ public interface License {
         return MyLicense.getInstance();
     }
 
-    void init2121();
+    void init2122();
 
     void setLicenseCode(String licenseCode);
 
