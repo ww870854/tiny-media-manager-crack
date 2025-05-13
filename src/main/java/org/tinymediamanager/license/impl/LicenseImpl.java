@@ -22,7 +22,6 @@ public class LicenseImpl implements License {
 
     private static final Map<String, String[]> apiKeysMap = new HashMap<>() {{
         put("tmdb", new String[]{ });
-        // TODO imdb api-url，imdb 页面暂无法搜刮
         put("imdb", new String[] { "https://www.imdb.com/" });
         put("omdbapi", new String[]{ });
         put("trakt", new String[]{ });
