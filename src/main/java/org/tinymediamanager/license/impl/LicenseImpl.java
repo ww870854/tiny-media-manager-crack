@@ -16,30 +16,34 @@ public class LicenseImpl implements License {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LicenseImpl.class);
 
+    private static final String[] DEFAULT_API = new String[0];
+
     private static LicenseImpl instance;
 
     private final Class<?> providerClass;
 
     private static final Map<String, String[]> apiKeysMap = new HashMap<>() {{
-        put("tmdb", new String[]{ });
+        put("tmdb", DEFAULT_API);
         put("imdb", new String[] { "https://www.imdb.com/" });
-        put("omdbapi", new String[]{ });
-        put("trakt", new String[]{ });
-        put("moviemeter", new String[]{ });
-        put("tvdb", new String[]{ });
+        put("omdbapi", DEFAULT_API);
+        put("trakt", DEFAULT_API);
+        put("moviemeter", DEFAULT_API);
+        put("tvdb", DEFAULT_API);
         put("anidb", new String[]{ "client=anidbscraper&clientver=1&protover=1&" });
         put("ofdb", new String[] { "https://www.ofdb.de/" });
         // TODO mpdbtv apiKey，收费，暂不开启
         // put("mpdbtv", null);
-        put("kodi", new String[]{ });
-        put("universal_movie", new String[]{ });
+        put("kodi", DEFAULT_API);
+        put("universal_movie", DEFAULT_API);
         put("fanarttv", new String[]{ "d2d31f9ecabea050fc7d68aa3146015f" });
-        put("ffmpeg", new String[]{ });
+        put("ffmpeg", DEFAULT_API);
         put("hd-trailers", new String[]{ "https://www.hd-trailers.net/movie/" });
         put("opensubtitles2", new String[] { "1GwVnk4nICRIDGfXp9FP8ABL3ssFUhx2" });
         put("tvmaze", new String[]{ "https://api.tvmaze.com/" });
-        put("universal_tvshow", new String[]{ });
-        put("mdblist", new String[] { });
+        put("universal_tvshow", DEFAULT_API);
+        put("mdblist", DEFAULT_API);
+        put("fernsehserien", DEFAULT_API);
+        put("tsdb", DEFAULT_API);
     }};
 
     private LicenseImpl() {
