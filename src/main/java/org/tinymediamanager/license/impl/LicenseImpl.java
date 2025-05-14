@@ -29,7 +29,7 @@ public class LicenseImpl implements License {
         put("tvdb", new String[]{ });
         put("anidb", new String[]{ "client=anidbscraper&clientver=1&protover=1&" });
         put("ofdb", new String[] { "https://www.ofdb.de/" });
-        // TODO mpdbtv apiKey，收费
+        // TODO mpdbtv apiKey，收费，暂不开启
         // put("mpdbtv", null);
         put("kodi", new String[]{ });
         put("universal_movie", new String[]{ });
@@ -39,6 +39,7 @@ public class LicenseImpl implements License {
         put("opensubtitles2", new String[] { "1GwVnk4nICRIDGfXp9FP8ABL3ssFUhx2" });
         put("tvmaze", new String[]{ "https://api.tvmaze.com/" });
         put("universal_tvshow", new String[]{ });
+        put("mdblist", new String[] { });
     }};
 
     private LicenseImpl() {
