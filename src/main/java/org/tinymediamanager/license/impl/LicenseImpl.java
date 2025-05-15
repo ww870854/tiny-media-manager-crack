@@ -23,11 +23,11 @@ public class LicenseImpl implements License {
     private final Class<?> providerClass;
 
     private static final Map<String, String[]> apiKeysMap = new HashMap<>() {{
-        put("tmdb", DEFAULT_API);
+        put("tmdb", new String[]{ "2b9acf560289dea4a21bf163668a3054" });
         put("imdb", new String[] { "https://www.imdb.com/" });
         put("omdbapi", DEFAULT_API);
         put("trakt", DEFAULT_API);
-        put("moviemeter", DEFAULT_API);
+        put("moviemeter", new String[]{ "892f3086adc27cb003dca9da9c6d023a" });
         put("tvdb", DEFAULT_API);
         put("anidb", new String[]{ "client=anidbscraper&clientver=1&protover=1&" });
         put("ofdb", new String[] { "https://www.ofdb.de/" });
