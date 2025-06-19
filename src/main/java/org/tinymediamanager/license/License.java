@@ -1,10 +1,12 @@
 package org.tinymediamanager.license;
 
+import org.tinymediamanager.license.impl.LicenseImpl;
+
 import java.time.LocalDate;
 
 public interface License {
     static License getInstance() {
-        return MyLicense.getInstance();
+        return LicenseImpl.getInstance();
     }
 
     void init2123();
