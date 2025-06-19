@@ -1,33 +1,35 @@
-package org.tinymediamanager.license;
+package org.tinymediamanager.license.impl;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.tinymediamanager.license.License;
+import org.tinymediamanager.license.LicenseEventListener;
+import org.tinymediamanager.license.TmmFeature;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class MyLicense implements License {
+public class LicenseImpl implements License {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MyLicense.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LicenseImpl.class);
 
-    private static MyLicense instance;
+    private static LicenseImpl instance;
 
     private final Class<?> providerClass;
 
     private static final Map<String, String[]> apiKeysMap = new HashMap<>() {{
-        put("tmdb", new String[]{ });
-        // TODO imdb api-url，imdb 页面暂无法搜刮
-        // put("imdb", null);
+        put("tmdb", new String[]{ "2b9acf560289dea4a21bf163668a3054" });
+        put("imdb", new String[] { "https://www.imdb.com/" });
         put("omdbapi", new String[]{ });
         put("trakt", new String[]{ });
-        put("moviemeter", new String[]{ });
+        put("moviemeter", new String[]{ "892f3086adc27cb003dca9da9c6d023a" });
         put("tvdb", new String[]{ });
         put("anidb", new String[]{ "client=anidbscraper&clientver=1&protover=1&" });
         put("ofdb", new String[] { "https://www.ofdb.de/" });
-        // TODO mpdbtv apiKey，收费
+        // TODO mpdbtv apiKey，收费，暂不开启
         // put("mpdbtv", null);
         put("kodi", new String[]{ });
         put("universal_movie", new String[]{ });
@@ -37,9 +39,10 @@ public class MyLicense implements License {
         put("opensubtitles2", new String[] { "1GwVnk4nICRIDGfXp9FP8ABL3ssFUhx2" });
         put("tvmaze", new String[]{ "https://api.tvmaze.com/" });
         put("universal_tvshow", new String[]{ });
+        put("mdblist", new String[] { });
     }};
 
-    private MyLicense() {
+    private LicenseImpl() {
         Class<?> providerClass;
         try {
             providerClass = Class.forName("org.tinymediamanager.scraper.interfaces.IMediaProvider");
@@ -50,9 +53,9 @@ public class MyLicense implements License {
         this.providerClass = providerClass;
     }
 
-    public synchronized static MyLicense getInstance() {
+    public synchronized static LicenseImpl getInstance() {
         if (null == instance) {
-            instance = new MyLicense();
+            instance = new LicenseImpl();
         }
         return instance;
     }
