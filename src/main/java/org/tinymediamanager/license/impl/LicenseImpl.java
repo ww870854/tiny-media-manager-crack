@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class LicenseImpl implements License {
 
@@ -20,26 +21,25 @@ public class LicenseImpl implements License {
 
     private final Class<?> providerClass;
 
-    private static final Map<String, String[]> apiKeysMap = new HashMap<>() {{
-        put("tmdb", new String[]{ "2b9acf560289dea4a21bf163668a3054" });
+    // 暂不开放的组件
+    private static final Set<String> NOT_OPENED_PROVIDER = Set.of(
+            "mpdbtv", // 网站目前处于检修中，暂不颁发api秘钥
+            "fernsehserien" // 德国网站，实在找不到接口地址
+    );
+
+    // 内置组件密钥
+    private static final Map<String, String[]> API_KEYS_MAP = new HashMap<>() {{
         put("imdb", new String[] { "https://www.imdb.com/" });
-        put("omdbapi", new String[]{ });
-        put("trakt", new String[]{ });
-        put("moviemeter", new String[]{ "892f3086adc27cb003dca9da9c6d023a" });
-        put("tvdb", new String[]{ });
         put("anidb", new String[]{ "client=anidbscraper&clientver=1&protover=1&" });
         put("ofdb", new String[] { "https://www.ofdb.de/" });
-        // TODO mpdbtv apiKey，收费，暂不开启
-        // put("mpdbtv", null);
-        put("kodi", new String[]{ });
-        put("universal_movie", new String[]{ });
         put("fanarttv", new String[]{ "d2d31f9ecabea050fc7d68aa3146015f" });
-        put("ffmpeg", new String[]{ });
         put("hd-trailers", new String[]{ "https://www.hd-trailers.net/movie/" });
+        put("opensubtitles", new String[] { "tinyMediaManager v5" });
         put("opensubtitles2", new String[] { "1GwVnk4nICRIDGfXp9FP8ABL3ssFUhx2" });
+        put("subdl", new String[]{ "https://api.subdl.com/api/v1/" });
+        put("yify", new String[]{ "https://yifysubtitles.ch" });
         put("tvmaze", new String[]{ "https://api.tvmaze.com/" });
-        put("universal_tvshow", new String[]{ });
-        put("mdblist", new String[] { });
+        put("trakt", new String[]{ "170d57cca2c98dd7bc983f91c167ab3ff73a29c81666a8e713fed349851f50ee" });
     }};
 
     private LicenseImpl() {
@@ -61,7 +61,7 @@ public class LicenseImpl implements License {
     }
 
     @Override
-    public void init2123() {
+    public void init522() {
         LOGGER.info("JUST FOR STUDYING!!!");
     }
 
@@ -108,13 +108,13 @@ public class LicenseImpl implements License {
 
     @Override
     public boolean isFeatureEnabled(TmmFeature tmmFeature) {
-        if (providerClass.isAssignableFrom(tmmFeature.getClass())) {
+        if (Objects.nonNull(providerClass) && providerClass.isAssignableFrom(tmmFeature.getClass())) {
             try {
                 String id = (String) tmmFeature.getClass().getMethod("getId").invoke(tmmFeature);
                 if (StringUtils.isBlank(id)) {
                     return false;
                 }
-                return apiKeysMap.containsKey(id);
+                return !NOT_OPENED_PROVIDER.contains(id);
             } catch (Exception e) {
                 LOGGER.info("NOT FOUND ID OF [" + tmmFeature.getFeatureName() + "]");
                 return false;
@@ -140,7 +140,7 @@ public class LicenseImpl implements License {
                 if (StringUtils.isBlank(id)) {
                     return null;
                 }
-                return apiKeysMap.get(id);
+                return API_KEYS_MAP.get(id);
             } catch (Exception e) {
                 LOGGER.info("NOT FOUND ID OF [" + tmmFeature.getFeatureName() + "]");
                 return null;
