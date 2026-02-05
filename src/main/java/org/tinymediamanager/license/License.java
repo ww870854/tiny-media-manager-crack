@@ -9,7 +9,7 @@ public interface License {
         return LicenseImpl.getInstance();
     }
 
-    void init2123();
+    void init522();
 
     void setLicenseCode(String licenseCode);
 
